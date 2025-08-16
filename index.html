@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Grid Maze</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            overflow: hidden;
+        }
+        
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #canvas {
+            display: block;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .control-group input, .control-group button {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .control-group button {
+            background: #4CAF50;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .control-group button:hover {
+            background: #45a049;
+        }
+        
+        .control-group button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        
+        #info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+            min-width: 200px;
+        }
+        
+        .key-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+            text-align: center;
+        }
+        
+        .key-controls h3 {
+            margin: 0 0 10px 0;
+        }
+        
+        .key-controls p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="canvas"></canvas>
+        
+        <div id="controls">
+            <h3>Maze Controls</h3>
+            
+            <div class="control-group">
+                <label for="mazeSize">Maze Size:</label>
+                <input type="number" id="mazeSize" value="10" min="5" max="20">
+            </div>
+            
+            <div class="control-group">
+                <label for="wallHeight">Wall Height:</label>
+                <input type="number" id="wallHeight" value="2" min="1" max="5" step="0.5">
+            </div>
+            
+            <div class="control-group">
+                <button id="generateMaze">Generate New Maze</button>
+            </div>
+            
+            <div class="control-group">
+                <button id="resetPosition">Reset Position</button>
+            </div>
+        </div>
+        
+        <div id="info">
+            <h3>Player Info</h3>
+            <p>Position: <span id="position">(0, 0, 0)</span></p>
+            <p>Direction: <span id="direction">North</span></p>
+            <p>FPS: <span id="fps">0</span></p>
+        </div>
+        
+        <div class="key-controls">
+            <h3>Movement Controls</h3>
+            <p><strong>W</strong> - Walk Forward</p>
+            <p><strong>S</strong> - Walk Backward</p>
+            <p><strong>A</strong> - Turn Left (90°)</p>
+            <p><strong>D</strong> - Turn Right (90°)</p>
+            <p><strong>Mouse</strong> - Look around</p>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="maze.js"></script>
+</body>
+</html>
